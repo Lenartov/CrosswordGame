@@ -8,8 +8,9 @@ using UnityEngine;
 public class LettersCircle : MonoBehaviour
 {
     [SerializeField] private LetterButton letterButtonPrefab;
-
     [SerializeField] private TextMeshProUGUI textField;
+    [SerializeField] private float margin = 80f;
+
 
     private RectTransform rectTransform;
     private LineRenderer lineRenderer;
@@ -51,7 +52,6 @@ public class LettersCircle : MonoBehaviour
     {
         letterButtons = new LetterButton[letters.Length];
 
-        float margin = 20f;
         float radius = CalcRadius() - margin;
 
         Vector3[] poses = Utility.GetCirclePositions(rectTransform.position, letters.Length, radius);

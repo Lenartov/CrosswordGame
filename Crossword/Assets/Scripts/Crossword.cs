@@ -5,6 +5,9 @@ using UnityEngine;
 public class Crossword : MonoBehaviour
 {
     [SerializeField] private CrosswordTile crosswordTilePrefab;
+    [SerializeField] private float margine = 130f;
+    [SerializeField] private float outlineOffset = 2.5f;
+
 
     public event Action OnAllWordsFinded;
 
@@ -104,7 +107,6 @@ public class Crossword : MonoBehaviour
 
     private void ShowVisual()
     {
-        float margine = 30f;
         Vector2 tileSize2D = Utility.GetTileSize(new Vector2(rectTransform.rect.width - margine, rectTransform.rect.height - margine), new IntPoint(grid.GetLength(0), grid.GetLength(1)));
 
         float tileSize;
@@ -125,7 +127,6 @@ public class Crossword : MonoBehaviour
         }
 
         float startPosOffset = tileSize * 0.5f;
-        float tileSizeOffset = 1f;
         float heightOffset = (rectTransform.rect.height - margine) * 0.5f;
         float widthOffset = (rectTransform.rect.width - margine) * 0.5f;
 
@@ -137,7 +138,7 @@ public class Crossword : MonoBehaviour
                 if (grid[x, y] != null && grid[x, y].Letter != '\0')
                 {
                     CrosswordTile tile = Instantiate(crosswordTilePrefab, Vector3.zero, Quaternion.identity, transform);
-                    Vector2 tilePos = new Vector2(x * (tileSize + tileSizeOffset) - widthOffset + startPosOffset, y * -(tileSize + tileSizeOffset) + heightOffset - startPosOffset);
+                    Vector2 tilePos = new Vector2(x * (tileSize + outlineOffset) - widthOffset + startPosOffset, y * -(tileSize + outlineOffset) + heightOffset - startPosOffset);
 
                     if(isHor)
                         tilePos = new Vector2(tilePos.x, tilePos.y + centralizOffset);
